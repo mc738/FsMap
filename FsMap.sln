@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "FsMap", "FsMap\FsMap.fsproj", "{49267CC3-AF7F-464A-8C9A-FB8143CC0052}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "FsMap.TestApp", "FsMap.TestApp\FsMap.TestApp.fsproj", "{74239D67-C9B1-4CAD-B483-47AC30E171B1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{49267CC3-AF7F-464A-8C9A-FB8143CC0052}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49267CC3-AF7F-464A-8C9A-FB8143CC0052}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49267CC3-AF7F-464A-8C9A-FB8143CC0052}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49267CC3-AF7F-464A-8C9A-FB8143CC0052}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74239D67-C9B1-4CAD-B483-47AC30E171B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74239D67-C9B1-4CAD-B483-47AC30E171B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74239D67-C9B1-4CAD-B483-47AC30E171B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74239D67-C9B1-4CAD-B483-47AC30E171B1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
