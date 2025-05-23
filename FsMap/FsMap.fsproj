@@ -10,7 +10,12 @@
         <Compile Include="V1\Core\Attributes.fs" />
         <Compile Include="V1\Dynamic\Impl.fs" />
         <Compile Include="V1\Dynamic\Operations.fs" />
-        <Folder Include="V1\Generated\" />
+        <Compile Include="V1\Generated\Json\Schema.fs" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Fabulous.AST" Version="1.5.0" />
+      <PackageReference Include="Microsoft.Json.Schema" Version="2.3.0" />
     </ItemGroup>
 
 </Project>
