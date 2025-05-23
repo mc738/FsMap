@@ -30,7 +30,7 @@ let defaultProperty =
 
 let dv = defaultProperty |> Option.map (fun dp -> dp.GetValue(null))
 
-let j = Schema.readSchema "C:\\Users\\mclif\Projects\\data\\json_schema\\github\\pr_response.json"
+let j = Schema.readSchemaFile "C:\\Users\\mclif\Projects\\data\\json_schema\\github\\pr_response.json"
 
 // For more information see https://aka.ms/fsharp-console-apps
 printfn "Hello from F#"
