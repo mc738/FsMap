@@ -1,5 +1,6 @@
 ﻿namespace FsMap.V1.Generated.Json
 
+open System.IO
 open Microsoft.Json.Schema
 
 module Schema =
@@ -10,3 +11,8 @@ module Schema =
         SchemaReader.ReadSchema(str, "")
 
     
+    let readSchemaFile (path: string) =
+        use fs = File.OpenRead path
+        
+        
+        SchemaReader.ReadSchema
