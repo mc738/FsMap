@@ -1,5 +1,6 @@
 ﻿open System.Reflection
 open FsMap.V1.Core.Attributes
+open FsMap.V1.Generated.Json
 
 type Foo =
     { Value: string }
@@ -24,11 +25,15 @@ let ``has default attribute`` (pi: PropertyInfo) =
     pi.GetCustomAttribute<DefaultAttribute>() |> Option.ofObj |> Option.isSome
 
 let defaultProperty =
-    props
-    |> Array.tryFind (fun pi ->
-        ``has default attribute`` pi //&& (pi :> MemberInfo).
-        
-        )
+    t.GetProperties(BindingFlags.Static ||| BindingFlags.Public)
+    |> Array.tryFind ``has default attribute``
+
+let dv = defaultProperty |> Option.map (fun dp -> dp.GetValue(null))
+
+let j = Schema.readSchema "C:\\Users\\mclif\Projects\\data\\json_schema\\github\\pr_response.json"
+
+
+
 
 // For more information see https://aka.ms/fsharp-console-apps
 printfn "Hello from F#"
