@@ -14,5 +14,6 @@ module Schema =
     let readSchemaFile (path: string) =
         use fs = File.OpenRead path
         
+        use sr = new StreamReader(fs)
         
-        SchemaReader.ReadSchema
+        SchemaReader.ReadSchema(sr, "")
