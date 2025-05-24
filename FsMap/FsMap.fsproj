@@ -8,8 +8,10 @@
     <ItemGroup>
         <Compile Include="Library.fs"/>
         <Compile Include="V1\Core\Attributes.fs" />
+        <Compile Include="V1\Core\Models.fs" />
         <Compile Include="V1\Dynamic\Impl.fs" />
         <Compile Include="V1\Dynamic\Operations.fs" />
+        <Compile Include="V1\Generated\CodeGeneration\Common.fs" />
         <Compile Include="V1\Generated\Json\Schema.fs" />
     </ItemGroup>
 
