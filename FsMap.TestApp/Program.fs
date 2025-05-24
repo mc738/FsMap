@@ -1,6 +1,46 @@
-﻿open System.Reflection
+﻿open System.IO
+open System.Reflection
 open FsMap.V1.Core.Attributes
+open FsMap.V1.Core.Models
 open FsMap.V1.Generated.Json
+
+module GenTest =
+    
+    open FsMap.V1.Generated.CodeGeneration.Common
+
+    let members =
+        [ ModuleMember.Record
+              { Namespace = None
+                Name = "Bar"
+                Attributes = []
+                Fields =
+                  [ { Name = "Value1"
+                      FieldType = FieldType.BaseType BaseType.String
+                      Attributes = []
+                      Optional = false }
+                    { Name = "Value2"
+                      FieldType = FieldType.BaseType BaseType.Int32
+                      Attributes = []
+                      Optional = true }
+                    { Name = "Value3"
+                      FieldType = FieldType.BaseType BaseType.DateTime
+                      Attributes = []
+                      Optional = true } ] }
+          ModuleMember.Record
+              { Namespace = None
+                Name = "Foo"
+                Attributes = []
+                Fields =
+                  [ { Name = "Bar"
+                      FieldType = FieldType.Reference "Bar"
+                      Attributes = []
+                      Optional = false } ] } ]
+
+    let run () =
+
+        generated "MyModule" members
+        |> fun r -> File.WriteAllText("C:\\Users\\mclif\\Projects\\dotnet\\FsMap\\FsMap.TestApp\\Test.fs", r)
+        
 
 type Foo =
     { Value: string }
@@ -17,20 +57,25 @@ type Bar =
     static member Default = { Name = ""; Value = 42 }
 
 
-let t = typeof<Foo>
+module Test =
 
-let props = t.GetProperties()
+    let t = typeof<Foo>
 
-let ``has default attribute`` (pi: PropertyInfo) =
-    pi.GetCustomAttribute<DefaultAttribute>() |> Option.ofObj |> Option.isSome
+    let props = t.GetProperties()
 
-let defaultProperty =
-    t.GetProperties(BindingFlags.Static ||| BindingFlags.Public)
-    |> Array.tryFind ``has default attribute``
+    let ``has default attribute`` (pi: PropertyInfo) =
+        pi.GetCustomAttribute<DefaultAttribute>() |> Option.ofObj |> Option.isSome
 
-let dv = defaultProperty |> Option.map (fun dp -> dp.GetValue(null))
+    let defaultProperty =
+        t.GetProperties(BindingFlags.Static ||| BindingFlags.Public)
+        |> Array.tryFind ``has default attribute``
 
-let j = Schema.readSchemaFile "C:\\Users\\mclif\Projects\\data\\json_schema\\github\\pr_response.json"
+    let dv = defaultProperty |> Option.map (fun dp -> dp.GetValue(null))
+
+    let j =
+        Schema.readSchemaFile "C:\\Users\\mclif\\Projects\\data\\json_schema\\examples\\example1.json"
+
+GenTest.run ()
 
 // For more information see https://aka.ms/fsharp-console-apps
 printfn "Hello from F#"
