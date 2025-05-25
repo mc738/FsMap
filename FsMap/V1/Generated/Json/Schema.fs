@@ -45,13 +45,15 @@ module Schema =
         member jt.GetDotNetScalarType() =
             match jt with
             | Array -> invalidOp "JsonType.Array is not a scalar type"
-            | Boolean -> typeof<bool>
-            | None -> failwith "" // typeof<null>
-            | Integer -> typeof<int32>
-            | Number -> typeof<float>
+            | Boolean -> Some typeof<bool>
+            | None -> Option.None //typeof<> //failwith "" // typeof<null>
+            | Integer -> Some typeof<int32>
+            | Number -> Some typeof<float>
             | Null -> failwith "" // typeof<null>
             | Object -> invalidOp "JsonType.Object is not a scalar type"
-            | String -> typeof<string>
+            | String -> Some typeof<string>
+    
+        member jt.ToFieldDefinition() = ()
     
     [<RequireQualifiedAccess>]
     type BuiltInFormat =
@@ -107,6 +109,9 @@ module Schema =
         
         match schema.Type.Count with
         | 1 ->
+            schema.
+            
+            
             match schema.Type[0] with
             | SchemaType.Array -> ()
             | SchemaType.Boolean -> ()
@@ -119,7 +124,7 @@ module Schema =
             ()
         | 0 ->
             // No type defined...
-            ()
+            failwith "TODO  - handle"
         | _ ->
             // If there is more than one valid type,
             // then any of these types if a valid value.
@@ -129,7 +134,7 @@ module Schema =
             // this can be simply put as an option 
             
             
-            ()
+            failwith "TODO - handle"
         
         
         ()
