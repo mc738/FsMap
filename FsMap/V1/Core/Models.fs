@@ -6,6 +6,63 @@ open System.Text.Json.Serialization
 
 module Models =
 
+    /// <summary>This constructor initializes the new Point to
+    /// (<paramref name="xPosition"/>,<paramref name="yPosition"/>).
+    /// </summary>
+    /// <param name="xPosition">the new Point's x-coordinate.</param>
+    /// <param name="yPosition">the new Point's y-coordinate.</param>
+    type DocumentComments =
+        { Summary: string list
+          Examples: ExampleComment list
+          Exceptions: ExceptionComment list
+          Includes: IncludeComment list
+          Parameters: ParameterComment list
+
+        }
+
+    and [<RequireQualifiedAccess>] SummaryCommentElement =
+        | Literal of string
+        /// <summary>
+        /// <c>para</c> element.
+        /// </summary>
+        | Paragraph of string list
+        /// <summary>
+        /// <c>paramref</c> element.
+        /// </summary>
+        | ParameterReference
+        | List
+        /// <summary>
+        /// <c>see</c> element.
+        /// </summary>
+        /// <param name="Cref">The <c>cref</c> value.</param>
+        | See of Cref: string
+
+    and ListElement =
+        { ListType: ListType
+          Header: ListItem
+          Items: ListItem }
+
+    and [<RequireQualifiedAccess>] ListType =
+        | Bullet
+        | Number
+        | Table
+
+    and ListItem = { Term: string; Description: string }
+
+    and ExampleComment = { Lines: string list }
+
+    and ExceptionComment = { Cref: string; Lines: string list }
+
+    and IncludeComment = { File: string; Path: string }
+
+    and ParameterComment = { Name: string; Content: string }
+
+    and PermissionComment = { Cref: string; Content: string }
+
+    and RemarksComment = { Content: string }
+
+    and ReturnsComment = { Content: string }
+
     [<RequireQualifiedAccess>]
     type BaseType =
         | Boolean
@@ -53,7 +110,8 @@ module Models =
             | String -> typeof<string>
             | Guid -> typeof<Guid>
 
-    type [<RequireQualifiedAccess>] FieldType =
+    [<RequireQualifiedAccess>]
+    type FieldType =
         | BaseType of BaseType
         | Record of RecordDefinition
         | DiscriminatedUnion of DiscriminatedUnionDefinition
@@ -95,4 +153,3 @@ module Models =
         | Record of RecordDefinition
         | DiscriminatedUnion of DiscriminatedUnionDefinition
         | Function of FunctionDefinition
-        
