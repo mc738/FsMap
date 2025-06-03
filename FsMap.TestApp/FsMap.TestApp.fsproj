@@ -7,11 +7,16 @@
 
     <ItemGroup>
         <Compile Include="Test.fs" />
+        <Compile Include="Examples.fs" />
         <Compile Include="Program.fs" />
     </ItemGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\FsMap\FsMap.fsproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="FsToolbox" Version="0.12.5" />
     </ItemGroup>
 
 </Project>
